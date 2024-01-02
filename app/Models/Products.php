@@ -4,21 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Categories;
 class Products extends Model
 {
     use HasFactory;
 
     protected $table = 'products';
-    public function feedbacks()
+    public function feedbacks():HasMany
     {
-        return $this->hasMany(Feedbacks::class);
+        return $this->hasMany(Feedbacks::class, 'products_id');
         //return $this->hasMany(Products::class, 'craftspeople_id', 'id');
     }
-    public function bookmark()
+    public function bookmark():HasMany
     {
-        return $this->hasMany(Bookmark::class);
+        return $this->hasMany(Bookmark::class, 'products_id');
         //return $this->hasMany(Products::class, 'craftspeople_id', 'id');
+    }
+    public function category(){
+        return $this->belongsTo(Categories::class, 'category_id');
     }
     protected $fillable = [
         'id',

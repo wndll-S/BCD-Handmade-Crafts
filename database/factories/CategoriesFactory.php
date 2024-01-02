@@ -17,7 +17,7 @@ class CategoriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->name(),
+            'title' => fake()->word(),
             'description' => fake()->realText($maxNbChars = 100, $indexSize = 2),
             'created_at' => now()
         ];

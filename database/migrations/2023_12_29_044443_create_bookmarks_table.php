@@ -13,21 +13,23 @@ return new class extends Migration
     {
         Schema::create('bookmarks', function (Blueprint $table) {
             $table->string('id', 11)->primary();
-
-            $table->foreignId('buyer_id')
-                    ->constrained(table: 'buyer')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-
-            $table->foreignId('product_id')
-                    ->constrained(table: 'products')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-
+            $table->string('buyer_id', 11);
             $table->string('product_id', 11);
             $table->string('name', 50);
             $table->string('description', 255);
             $table->dateTime('created_at', $precision = 0);
+
+            $table->foreign('buyer_id')
+                ->references('id')
+                ->on('buyer')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

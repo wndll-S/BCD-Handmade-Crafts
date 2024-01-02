@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,21 +72,12 @@ Route::get('buyer/home', function () {
 Route::get('buyer/handmade-crafts', function () {
     return view('buyer/handmade_crafts');
 });
-
-Route::get('buyer/category', function () {
-    return view('buyer/categories');
-});
-
-Route::get('buyer/bookmarks', function () {
-    return view('buyer/bookmarks');
-});
-
-Route::get('buyer/account', function () {
-    return view('buyer/account');
-});
-
-Route::get('category', [CategoryController::class, 'index']);
-
+Route::post('/store', [BuyerController::class, 'store']);
+Route::get('/buyer/register', [BuyerController::class, 'register']);
+Route::get('/buyer/handmade-crafts', [ProductsController::class, 'index']);
+Route::get('/buyer/bookmarks', [BookmarksController::class, 'index']);
+Route::get('/buyer/category', [CategoryController::class, 'index']);
+Route::get('/buyer/account', [AccountController::class, 'index']);
 
 
 //pang tawag sng isa ka function sa isa ka controller

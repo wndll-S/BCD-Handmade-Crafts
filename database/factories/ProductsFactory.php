@@ -18,11 +18,11 @@ class ProductsFactory extends Factory
     {
         return [
         'id' => fake()->bothify('PR#########'),
-        'craftspeople_id'=>fake()->bothify('??#########'),
+        'craftspeople_id'=>CraftspeopleFactory::factory(),
         'name'=>fake()->sentence($nbWords = 3, $variableNbWords = true),
         'description'=>fake()->sentence($nbWords = 10, $variableNbWords = true),
         'image_url'=>fake()->imageUrl(200, 200, 'cats'),
-        'category_id'=>fake()->numberBetween(1,3),
+        'category_id'=>CategoriesFactory::factory(),
         'created_at'=>now(),
         ];
     }

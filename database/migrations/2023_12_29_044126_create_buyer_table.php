@@ -15,11 +15,15 @@ return new class extends Migration
             $table->string('id', 11)->primary();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
-            $table->string('name_ext', 3);
+            $table->string('name_ext', 3)
+                  ->nullable();
             $table->string('password', 255);
-            $table->string('mobile_number', 11);
-            $table->string('email', 255);
-            $table->string('image_url', 255);
+            $table->string('mobile_number', 11)
+                  ->nullable();
+            $table->string('email', 255)
+                  ->unique();
+            $table->string('image_url', 255)
+                  ->nullable();
             $table->dateTime('created_at', $precision = 0);
         });
     }

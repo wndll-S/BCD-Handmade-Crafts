@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Craftspeople extends Model
 {
     use HasFactory;
-    public function products()
+    public function products(): HasMany
     {
-        return $this->hasMany(Products::class);
-        //return $this->hasMany(Products::class, 'craftspeople_id', 'id');
+        //return $this->hasMany(Products::class);
+        return $this->hasMany(Products::class, 'craftspeople_id', 'id');
     }
     protected $table = 'craftspeople';
     protected $fillable = [

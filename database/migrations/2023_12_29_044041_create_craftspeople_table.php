@@ -15,7 +15,8 @@ return new class extends Migration
             $table->string('id', 11)->primary();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
-            $table->string('name_ext', 3);
+            $table->string('name_ext', 3)
+                  ->nullable();
             $table->string('password', 255);
             $table->string('mobile_number', 11);
             $table->string('address', 255);
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->integer('account_status');
             $table->dateTime('created_at', $precision = 0);
         });
+        
     }
 
     /**

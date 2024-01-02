@@ -20,7 +20,7 @@ class BuyerFactory extends Factory
         'id' => fake()->bothify('??#########'),
         'first_name'=> fake()->firstName($gender = 'male'|'female'),
         'last_name'=> fake()->lastName,
-        'name_ext'=> fake()->suffix,
+        'name_ext'=> fake()->optional()->suffix,
         'password'=> fake()->password,
         'mobile_number'=> fake()->numerify('09#########'),
         'email'=> fake()->freeEmail,

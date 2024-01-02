@@ -13,5 +13,6 @@ class BuyerSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Buyer::factory(10)->create();
+        
     }
 }

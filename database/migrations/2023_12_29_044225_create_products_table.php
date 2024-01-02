@@ -13,12 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->string('id', 11)->primary();
-            
-            $table->foreignId('craftspeople_id')
-                    ->constrained(table: 'craftspeople')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-
+            $table->string('craftspeople_id', 11);
             $table->foreignId('category_id')
                     ->constrained(table: 'categories')
                     ->onUpdate('cascade')
@@ -28,6 +23,12 @@ return new class extends Migration
             $table->string('description', 255);
             $table->string('image_url', 255);
             $table->dateTime('created_at', $precision = 0);
+            
+            $table->foreign('craftspeople_id')
+                ->references('id')
+                ->on('craftspeople')
+                ->onUpdate('cascade')                    
+                ->onDelete('cascade');
         });
     }
 
