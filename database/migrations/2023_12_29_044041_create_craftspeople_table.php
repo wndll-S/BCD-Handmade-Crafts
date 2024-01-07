@@ -25,7 +25,11 @@ return new class extends Migration
             $table->integer('account_status');
             $table->dateTime('created_at', $precision = 0);
         });
-        
+        Schema::table('craftspeople', function (Blueprint $table) {
+            $table->enum('account_status', ['Approved', 'Disapproved', 'Waiting'])
+                  ->default('Waiting')
+                  ->change();
+        });
     }
 
     /**

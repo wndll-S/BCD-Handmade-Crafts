@@ -18,11 +18,13 @@ class Products extends Model
     }
     public function bookmark():HasMany
     {
-        return $this->hasMany(Bookmark::class, 'products_id');
-        //return $this->hasMany(Products::class, 'craftspeople_id', 'id');
+        return $this->hasMany(Bookmark::class, 'product_id');
     }
     public function category(){
         return $this->belongsTo(Categories::class, 'category_id');
+    }
+    public function craftspeople(){
+        return $this->belongsTo(Craftspeople::class, 'craftspeople_id');
     }
     protected $fillable = [
         'id',

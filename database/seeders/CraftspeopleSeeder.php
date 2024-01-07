@@ -14,7 +14,7 @@ class CraftspeopleSeeder extends Seeder
     public function run(): void
     {
         
-        Craftspeople::factory(10)->create();
+        Craftspeople::factory(20)->create();
         
     }
 }

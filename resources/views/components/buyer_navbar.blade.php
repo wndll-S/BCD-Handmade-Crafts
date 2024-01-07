@@ -12,7 +12,7 @@
                 
                 <!-- logo -->
                 <div >
-                    <a href="#" class="flex items-center sm:mx-auto py-5 px-2 text-gray-700 hover:text-gray-900">
+                    <a href="/buyer/home" class="flex items-center sm:mx-auto py-5 px-2 text-gray-700 hover:text-gray-900">
                     <svg class="h-6 w-6 mr-1 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
@@ -56,7 +56,7 @@
                 <x-dropdownMenu />
             </div>
              <!-- Dropdown menu (mobile)-->
-            <div id="dropdownInformation" class="mr-4 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+            <div id="dropdownInformation" class="mr-4 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-content dark:bg-gray-700 dark:divide-gray-600">
                 <x-dropdownMenu />
             </div>
         </div>

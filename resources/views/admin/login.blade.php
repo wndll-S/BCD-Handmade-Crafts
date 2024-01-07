@@ -1,64 +1,28 @@
-@include('partials.__header')
+@include('partials.__header', [$title, $role])
     <!-- navbar goes here -->
-    <nav class="bg-gray-100">
-        <div class="max-w-6xl mx-auto px-4">
-        <div class="flex justify-between">
-    
-            <div class="flex space-x-4">
+    <nav class="bg-gray-100 ">
+        <div class="flex justify-center items-center">
             <!-- logo -->
-            <div>
                 <a href="#" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
                 <svg class="h-6 w-6 mr-1 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
-                <span class="font-bold">BCD Handmade Crafts</span>
+                <span class="font-bold text-3xl">BCD Handmade Crafts</span>
                 </a>
-            </div>
-            <x-messages />
-            <!-- primary nav -->
-            {{-- <div class="hidden md:flex items-center space-x-1">
-                <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Features</a>
-            </div> --}}
-            </div>
-    
-            <!-- secondary nav -->
-            <div class="hidden md:flex items-center space-x-1">
-            <a href="#" class="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Login</a>
-            <a href="register" class="py-5 px-3">Signup</a>
-            </div>
-    
-            <!-- mobile button goes here -->
-            <div class="md:hidden flex items-center">
-            <button class="mobile-menu-button">
-                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-            </div>
-        </div>
-        </div>
-    
-        <!-- mobile menu -->
-        <div class="mobile-menu hidden md:hidden ">
-        <a href="" class="block py-2 px-4 text-sm hover:bg-gray-200 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Login</a>
-        <a href="" class="block py-2 px-4 text-sm hover:bg-gray-200">Signup</a>
+            {{-- <x-messages /> --}}
         </div>
     </nav>
   
 
-    <main class="md:flex flex-grow lg:flex-row justify-between items-center sm:block">
-        <section class="flex flex-col items-center justify-center px-6 py-8 ml-auto md:h-full lg:py-0">
-            <h1 class="font-bold text-8xl">butang d pic</h1>
-            
-        </section>
+    <main class="lg:pt-10 items-center sm:block">
 
-        <section class="flex flex-col lg:w-96 items-center justify-center px-6 py-8 mx-auto  md:h-full lg:py-0 lg:mr-24">
+        <section class="flex flex-col items-center justify-center px-6 py-8 mx-auto  md:h-full lg:py-0 ">
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8 shadow-2xl">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Sign in to your account
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="/login/process" method="POST" autocomplete="off">
+                    <form class="space-y-4 md:space-y-6" action="/login/admin" method="POST" autocomplete="off">
                         @csrf
                         @error('email')
                         <div class="flex items-center p-2 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -90,10 +54,8 @@
                             </div>
                             <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                         </div>
-                        <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign In</button>
-                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Don’t have an account yet? <a href="register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign Up</a>
-                        </p>
+                        <button type="submit" class="w-full text-white bg-gray-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign In</button>
+                        
                     </form>
                 </div>
             </div>

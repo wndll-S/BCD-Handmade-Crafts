@@ -12,8 +12,11 @@ class Craftspeople extends Model
     public function products(): HasMany
     {
         //return $this->hasMany(Products::class);
-        return $this->hasMany(Products::class, 'craftspeople_id', 'id');
+        return $this->hasMany(Products::class, 'craftspeople_id');
     }
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $table = 'craftspeople';
     protected $fillable = [
         'id',

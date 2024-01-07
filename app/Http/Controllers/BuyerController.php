@@ -9,10 +9,14 @@ use App\Models\Buyer;
 use Carbon\Carbon;
 class BuyerController extends Controller
 {
+    public function index(){
+        $data = Buyer::all();
+        return view('buyer.account', ['account' => $data])->with('title', 'Account Details');
+    }
     public function store(Request $request){
         // dd($request);
         $validated = $request->validate([
-            "first_name" => ['required', 'min:4'],
+            "first_name" => ['required', 'min:3'],
             "last_name" => ['required', 'min:2'],
             "email" => ['required', 'email', Rule::unique('buyer', 'email')],
             "password" => 'required | confirmed | min:6'
@@ -25,12 +29,30 @@ class BuyerController extends Controller
         auth()->guard('buyer')->login($buyer);
         return redirect('/buyer/home');
     }
+    public function process(Request $request){
+        $validated = $request->validate([
+            "email" => ['required', 'email'],
+            "password" => 'required'
+        ]);
+        if(auth('buyer')->attempt($validated)){
+            $request->session()->regenerate();
+            return redirect('/buyer/home')->with(['message' => 'Welcome back!']);
+        }
+        return back()->withErrors(['email' => 'Login Failed'])
+                     ->onlyInput('email');
+    }
     private function generateCustomId()
     {
         // Generate a unique ID starting with 'B' followed by 10 numbers
         return 'B' . str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT);
     }
     public function register(){
-        return view('buyer.register');
+        return view('buyer.register')->with('title', 'Account Registration');
+    }
+    public function destroy(Request $request, $id){
+        $data = Buyer::where('id', $id)->firstOrFail();
+        $validated = $request->validate([
+
+        ]);
     }
 }

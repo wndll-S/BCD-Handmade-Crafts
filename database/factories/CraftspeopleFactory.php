@@ -26,7 +26,7 @@ class CraftspeopleFactory extends Factory
         'address'=> fake()->address,
         'email'=> fake()->freeEmail,
         'image_url'=> fake()->imageUrl($width = 640, $height = 480),
-        'account_status'=> fake()->numberBetween($min = 1, $max = 3),
+        'account_status'=> fake()->numberBetween($min = 1, $max = 4),
         'created_at' => now()
         ];
     }
