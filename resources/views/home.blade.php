@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User ID - {{$id}}</title>
+    <title>User ID</title>
     
     <link rel="stylesheet" href="{{ asset('css/bootstrap5.css') }}">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -18,24 +18,6 @@
     <h1>
       {{-- @dd($data); --}}
     </h1>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ $id }}</td>
-          <td>{{ $name }}</td>
-          <td>{{ $age }}</td>
-          <td>{{ $email }}</td>
-        </tr>
-      </tbody>
-    </table>
     <div class="container-md">
       
         <div class="row">

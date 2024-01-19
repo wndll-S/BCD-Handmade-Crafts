@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Categories;
 class Products extends Model
 {
     use HasFactory;
 
     protected $table = 'products';
+    public $incrementing = false;
+    protected $keyType = 'string';
     public function feedbacks():HasMany
     {
         return $this->hasMany(Feedbacks::class, 'products_id');
@@ -19,6 +20,10 @@ class Products extends Model
     public function bookmark():HasMany
     {
         return $this->hasMany(Bookmark::class, 'product_id');
+    }
+    public function transactions():HasMany
+    {
+        return $this->hasMany(Transactions::class, 'product_id');
     }
     public function category(){
         return $this->belongsTo(Categories::class, 'category_id');
@@ -33,7 +38,12 @@ class Products extends Model
         'description',
         'image_url',
         'category_id',
+        'price',
+        'quantity',
+        'status',
         'created_at',
+        'updated_at'
     ];
     public $timestamps = false;
 }
+

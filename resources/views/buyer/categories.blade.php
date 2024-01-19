@@ -11,7 +11,7 @@
 
          <div class="grid md:grid-cols-2 grid-cols-1  gap-4 mb-4">
             @foreach ($categories as $category)
-               <a href="/buyer/handmade-crafts#{{$category->title}}" id={{ $category->id }} class="rounded bg-gray-100 h-28 dark:bg-gray-800 p-5 hover:bg-gray-400">
+               <a href="/handmade-crafts#{{$category->title}}" id={{ $category->id }} class="rounded bg-gray-100 h-28 dark:bg-gray-800 p-5 hover:bg-gray-400">
                   <h2 class="font-bold text-xl">{{ $category->title }}</h2>
                   <p> {{ $category->description }} </p>
                </a>

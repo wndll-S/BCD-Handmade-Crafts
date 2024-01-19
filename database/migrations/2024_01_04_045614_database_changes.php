@@ -15,6 +15,9 @@ return new class extends Migration
             $table->enum('account_status', ['Activated', 'Declined', 'Pending', 'Suspended'])
                   ->default('Pending')
                   ->change();
+            $table->string('facebook_url')->nullable();
+            $table->string('instagram_url')->nullable();
+            $table->string('tiktok_url')->nullable();
         });
     }
 
