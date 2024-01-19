@@ -38,6 +38,15 @@
                @endif
             </div>
          </div>
+         @if ($errors->any())
+            <div class="alert alert-danger">
+               <ul>
+                     @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                     @endforeach
+               </ul>
+            </div>
+         @endif
       </div>
       
    </div>
@@ -79,8 +88,10 @@
            </button>
            <div class="p-4 md:p-5">
                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Register as a Seller</h3>
-               <form class="space-y-4 md:space-y-6" action="/store" method="POST">
+
+               <form action="/store/seller" method="POST"  class="space-y-4 md:space-y-6">
                   @csrf 
+                  <input type="text" name="account_status" value="Pending" hidden>
                   <div class="flex items-center lg:justify-between md:justify-between">
                      <div class="w-full">
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
@@ -93,7 +104,14 @@
                      </div>
                      <div class="md:ml-5 ml-2 w-full">
                         <label for="name_ext" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name Extension</label>
-                        <input type="text" name="name_ext" id="name_ext" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jr." value={{auth('buyer')->user()->name_ext}}>
+                        <select name="name_ext" id="name_ext" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                           <option value="value={{auth('buyer')->user()->name_ext}}" selected disabled>Name extension:</option>
+                           <option value="Sr.">Sr.</option>
+                           <option value="Jr.">Jr.</option>
+                           <option value="III">III</option>
+                           <option value="IV">IV</option>
+                           <option value="V">V</option>
+                        </select>
                      </div>
                   </div>
                   @error('first_name')
@@ -119,7 +137,7 @@
                      <div class="md:ml-5 ml-2">
                         <label for="mobile_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile Number</label>
                         <input type="number" name="mobile_number" id="mobile_number" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="09*********" required="" value={{auth('buyer')->user()->mobile_number}}>
-                        @error('email')
+                        @error('mobile_number')
                            <p class="text-red-500 text-xs">
                                  {{$message}}
                            </p>
@@ -129,7 +147,7 @@
                   <div>
                      <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
                      <textarea name="address" id="address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Lot #, Block #, Subdivision/Purok, Barangay, City, Philippines" required=""></textarea>
-                     @error('email')
+                     @error('address')
                         <p class="text-red-500 text-xs">
                               {{$message}}
                         </p>
@@ -137,7 +155,7 @@
                   </div>
                   <div>
                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                     <input type="password" name="password" id="password" placeholder="•••••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                     <input type="password" name="password" id="password" placeholder="•••••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{auth('buyer')->user()->name_ext}}">
                      @error('password')
                         <p class="text-red-500 text-xs">
                               {{$message}}
@@ -148,6 +166,12 @@
                      <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
                      <input type="password" name="password_confirmation" id="password_confirmation" placeholder="•••••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                   </div>
+                  {{-- <div>
+                     <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selfie Picture</label>
+                     <input type="file" name="image_url" id="image_url" value="{{auth('buyer')->user()->image_url}}">
+                  </div> --}}
+                  <input type="text" name="image_url" value="hehe" hidden>
+
                   <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign Up</button>
             </form>  
            </div>

@@ -27,7 +27,7 @@ class BuyerController extends Controller
 
         $buyer = Buyer::create($validated);
         auth()->guard('buyer')->login($buyer);
-        return redirect('/buyer/home');
+        return redirect('/home');
     }
     public function process(Request $request){
         $validated = $request->validate([
@@ -36,23 +36,21 @@ class BuyerController extends Controller
         ]);
         if(auth('buyer')->attempt($validated)){
             $request->session()->regenerate();
-            return redirect('/buyer/home')->with(['message' => 'Welcome back!']);
+            return redirect('/home')->with(['message' => 'Welcome back!']);
         }
         return back()->withErrors(['email' => 'Login Failed'])
                      ->onlyInput('email');
-    }
-    private function generateCustomId()
-    {
-        // Generate a unique ID starting with 'B' followed by 10 numbers
-        return 'B' . str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT);
     }
     public function register(){
         return view('buyer.register')->with('title', 'Account Registration');
     }
     public function destroy(Request $request, $id){
-        $data = Buyer::where('id', $id)->firstOrFail();
-        $validated = $request->validate([
-
-        ]);
+        $data = Buyer::find($id);
+        $data->delete();
+    }
+    private function generateCustomId()
+    {
+        // Generate a unique ID starting with 'B' followed by 10 numbers
+        return 'B' . str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT);
     }
 }

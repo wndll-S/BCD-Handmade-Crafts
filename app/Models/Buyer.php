@@ -22,6 +22,13 @@ class Buyer extends Model implements Authenticatable
         return $this->hasMany(Feedbacks::class, 'buyer_id');
         //return $this->hasMany(Products::class, 'craftspeople_id', 'id');
     }
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transactions::class, 'buyer_id');
+        //return $this->hasMany(Products::class, 'craftspeople_id', 'id');
+    }
+    public $incrementing = false;
+    protected $keyType = 'string';
     
     protected $fillable = [
         'id',

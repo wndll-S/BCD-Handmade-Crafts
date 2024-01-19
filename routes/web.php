@@ -5,7 +5,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\CraftspeopleController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,15 +46,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('index');
-});
 //admin routes
 Route::get('/admin', [AdminController::class, 'admin']);
 Route::get('/admin/accounts', [AccountController::class, 'index']);
 Route::get('/admin/handmade-crafts', [ProductsController::class, 'index'])->name('admin.handmade_crafts');
 Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
 Route::get('/admin/category/{id}', [CategoryController::class, 'edit']);
+Route::get('/admin/transactions', [TransactionsController::class, 'index']);
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard')->with('title', 'Dashboard');
 });
@@ -67,40 +67,57 @@ Route::delete('/delete/buyer/{id}', [BuyerController::class, 'destroy']);
 
 
 // seller routes
+Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory'])->group(function(){
+    Route::get('/seller/dashboard', function () {
+        return view('seller.home');
+    });
+});
+
 Route::get('/seller/login', function () {
     return view('seller.login');
 });
-
 Route::get('/seller/register', function () {
     return view('seller.register');
 });
-
-Route::get('seller/home', function () {
-    return view('seller/home');
+Route::get('/products/add', function () {
+    return view('seller.add_product');
+});
+Route::get('/seller/{id}/products', [ProductsController::class, 'index'])->name('seller.products');
+//mga same controller nga file under CraftspeopleController
+Route::controller(CraftspeopleController::class)->group(function(){
+    Route::post('/seller/login/process', 'process');
+    Route::post('/store/seller', 'store');
 });
 
 //buyer routes
 // Your routes that require the 'buyer' guard authentication go here
 Route::middleware(['auth:buyer', 'App\Http\Middleware\RevalidateBackHistory'])->group(function () {
-    Route::get('buyer/home', function () {
-        return view('buyer/home')->with('title', 'Home');
+    Route::get('/home', function () {
+        return view('buyer.home')->with('title', 'Home');
     });
-    Route::get('/buyer/handmade-crafts', [ProductsController::class, 'index'])->name('buyer.handmade_crafts');
-    Route::get('/buyer/bookmarks', [BookmarksController::class, 'displayBookmarks']);
-    Route::get('/buyer/category', [CategoryController::class, 'index'])->name('buyer.categories');;
-    Route::get('/buyer/account', [BuyerController::class, 'index']);
+    Route::get('/handmade-crafts', [ProductsController::class, 'index'])->name('buyer.handmade_crafts');
+    Route::get('/bookmarks', [BookmarksController::class, 'displayBookmarks']);
+    Route::get('/category', [CategoryController::class, 'index'])->name('buyer.categories');;
+    Route::get('/account', [BuyerController::class, 'index']);
 });
 
-Route::get('buyer/login', function () {
-    return view('buyer/login')->with(['role' => 'buyer', 'title' => 'BCD Handmade Crafts']);
+Route::get('/login', function () {
+    return view('buyer.login')->with(['role' => 'buyer', 'title' => 'BCD Handmade Crafts']);
 })->name('login');
 
-Route::post('/store', [BuyerController::class, 'store']);
-Route::get('/buyer/register', [BuyerController::class, 'register']);
+//mga same controller nga file under BuyerController
+Route::controller(BuyerController::class)->group(function(){
+    Route::post('/store/buyer','store');
+    Route::get('/register', 'register');
+    Route::post('/login/process',  'process');
+});
+
 Route::post('/logout', [AccountController::class, 'logout']);
-Route::post('/login/process', [BuyerController::class, 'process']);
 
 
+Route::get('/', function(){
+    return view('index');
+});
 //pang tawag sng isa ka function sa isa ka controller
 Route::get('/user', [UserController::class, 'index']);
 
@@ -115,5 +132,8 @@ Route::get('/user/{id}', [UserController::class, 'show'])->middleware('auth'); *
  
 
 
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 

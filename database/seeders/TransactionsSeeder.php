@@ -4,17 +4,14 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Products;
-use App\Models\Craftspeople;
-class CraftspeopleSeeder extends Seeder
+use App\Models\Transactions;
+class TransactionsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        
-        Craftspeople::factory(5)->create();
-        
+        Transactions::factory(10)->create();
     }
 }

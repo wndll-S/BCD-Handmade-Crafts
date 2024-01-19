@@ -17,7 +17,7 @@
                      <a href="#" id={{ $product->id }} class="rounded bg-gray-100  dark:bg-gray-800 p-5 hover:bg-gray-400">
                         <h2 class="font-bold text-xl">{{ $product->name }}</h2>
                         <p> description {{ $product->description }} </p>
-                        <p> seller: {{ $product->craftspeople_id }} </p>
+                        <p> seller: {{ $product->craftspeople->first_name }} {{ $product->craftspeople->last_name }} {{ $product->craftspeople->name_ext }}</p>
                         <p> category: {{ $product->category->title }} </p>
                      </a>
                   @endforeach
