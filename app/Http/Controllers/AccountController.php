@@ -59,7 +59,13 @@ class AccountController extends Controller
             $request->session()->regenerateToken();
     
             $message = 'Logout Successful!';
-            return redirect("/{$guard}/login")->with('message', $message);
+            if($guard == 'buyer'){
+                return redirect("/login")->with('message', $message);
+            }
+            else{
+                return redirect("/{$guard}/login")->with('message', $message);
+            }
+            
         }
     
         return redirect('/');
