@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Categories;
 use App\Models\Bookmark;
+use App\Models\Products;
+use App\Models\Transactions;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,15 +25,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // View::composer([''], function($view){
+        //     $seller = auth()->guard('seller')->user();
+
+        // });
         View::composer('*', function ($view) {
             $categories = Categories::all();
-            
+            $orders = Transactions::whereIn('status', ['pending', 'processing', 'out-for-delivery'])->get();
+            // $products = Products;
             // Filter categories with products
             $categoriesWithProducts = $categories->filter(function ($category) {
-                return $category->products->isNotEmpty();
+                return $category->products->where('status', 'Active')->isNotEmpty();
             });
-        
-            $view->with('categoriesWithProducts', $categoriesWithProducts);
+            // $category->products->where('status', 'active')->isNotEmpty();
+            $view->with(['categoriesWithProducts' => $categoriesWithProducts, 'categories' => $categories, 'orders' => $orders]);
         
             // Check if there's an authenticated buyer user
             $buyerUser = auth('buyer')->user();

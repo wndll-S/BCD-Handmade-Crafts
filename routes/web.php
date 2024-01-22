@@ -6,10 +6,12 @@ use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\CraftspeopleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckSellerAccountStatus;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,13 +55,14 @@ Route::get('/admin/handmade-crafts', [ProductsController::class, 'index'])->name
 Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
 Route::get('/admin/category/{id}', [CategoryController::class, 'edit']);
 Route::get('/admin/transactions', [TransactionsController::class, 'index']);
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard')->with('title', 'Dashboard');
-});
+
+Route::get('/admin/dashboard', [DashboardController::class, 'admin']);
 Route::post('/login/admin', [AdminController::class, 'process']);
 Route::get('/accounts/{id}', [AccountController::class, 'show']);
+Route::get('/admin/handmade-crafts/{id}', [ProductsController::class, 'show']);
 Route::put('/update/craftspeople/{id}', [AccountController::class, 'update']);
 Route::put('/update/category/{id}', [CategoryController::class, 'update']);
+Route::put('/update/product/{id}', [ProductsController::class, 'update']);
 //waay pa ni na himo sa controller
 Route::delete('/delete/category/{id}', [CategoryController::class, 'destroy']);
 Route::delete('/delete/buyer/{id}', [BuyerController::class, 'destroy']);
@@ -67,22 +70,28 @@ Route::delete('/delete/buyer/{id}', [BuyerController::class, 'destroy']);
 
 
 // seller routes
-Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory'])->group(function(){
+Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory', 'check.seller.account'])->group(function(){
     Route::get('/seller/dashboard', function () {
         return view('seller.home');
+    })->name('dashboard');
+    Route::get('/seller/orders', [TransactionsController::class, 'orders']);
+    Route::put('/order/edit/{id}', [TransactionsController::class, 'update']);
+    Route::post('/store/product', [ProductsController::class, 'store']);
+    Route::get('/seller/products', [ProductsController::class, 'index'])->name('seller.products');
+    Route::get('/products/add', function () {
+        return view('seller.add_product');
     });
 });
-
+Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory'])->group(function(){
+    Route::get('/pending', [CraftspeopleController::class, 'pending'])->name('pending');
+});
 Route::get('/seller/login', function () {
     return view('seller.login');
 });
 Route::get('/seller/register', function () {
     return view('seller.register');
 });
-Route::get('/products/add', function () {
-    return view('seller.add_product');
-});
-Route::get('/seller/{id}/products', [ProductsController::class, 'index'])->name('seller.products');
+
 //mga same controller nga file under CraftspeopleController
 Route::controller(CraftspeopleController::class)->group(function(){
     Route::post('/seller/login/process', 'process');
@@ -99,11 +108,16 @@ Route::middleware(['auth:buyer', 'App\Http\Middleware\RevalidateBackHistory'])->
     Route::get('/bookmarks', [BookmarksController::class, 'displayBookmarks']);
     Route::get('/category', [CategoryController::class, 'index'])->name('buyer.categories');;
     Route::get('/account', [BuyerController::class, 'index']);
+    Route::get('/orders', [TransactionsController::class, 'orders']);
 });
+
+Route::get('/handmade-crafts/order/{id}', [TransactionsController::class, 'create']);
+Route::post('/store/transaction', [TransactionsController::class, 'store']);
 
 Route::get('/login', function () {
     return view('buyer.login')->with(['role' => 'buyer', 'title' => 'BCD Handmade Crafts']);
 })->name('login');
+
 
 //mga same controller nga file under BuyerController
 Route::controller(BuyerController::class)->group(function(){
@@ -112,7 +126,7 @@ Route::controller(BuyerController::class)->group(function(){
     Route::post('/login/process',  'process');
 });
 
-Route::post('/logout', [AccountController::class, 'logout']);
+Route::post('/logout', [AccountController::class, 'logout'])->name('logout');
 
 
 Route::get('/', function(){

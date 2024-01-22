@@ -8,6 +8,9 @@ use App\Models\Craftspeople;
 use App\Models\Buyer;
 class CraftspeopleController extends Controller
 {
+    public function pending(){
+        return view('seller.pending_account');
+    }
     public function store(Request $request){
         $validated = $request->validate([
             "first_name" => ['required', 'min:3'],

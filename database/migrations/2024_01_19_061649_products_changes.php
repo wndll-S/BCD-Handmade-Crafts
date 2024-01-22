@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->float('price', 8, 2);
             $table->integer('quantity');
-            $table->enum('status', ['Active', 'Pending', 'Deleted'])
+            $table->enum('status', ['Active', 'Pending', 'Deleted', 'Declined', 'Suspended'])
                   ->default('Pending');
             $table->timestamps();
         });

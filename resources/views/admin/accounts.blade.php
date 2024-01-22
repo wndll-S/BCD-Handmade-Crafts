@@ -9,11 +9,11 @@
       <div class="p-4 md:border-l-2  border-gray-200 dark:border-gray-700 ">
         <h2 class="font-bold text-5xl text-gray-800 mb-5">Account Details</h2>
          <div class="bg-gray-300 rounded-lg">
-            <div class="flex flex-row ">
-               <button id="craftspeople_viewer" class="md:flex items-center hover:bg-gray-400 hover:rounded-tl-lg lg:w-36 ">
+            <div class="relative">
+               <button id="craftspeople_viewer" class="md:flex font-semibold pl-4 rounded-r-full z-50 bg-white view items-center hover:bg-gray-400 hover:rounded-tl-lg lg:w-36 ">
                   <span class="py-5 px-3 text-gray-700 hover:text-gray-900">Craftspeople</span>
                </button> 
-               <button id="buyers_viewer" class="md:flex items-center hover:bg-gray-400 lg:w-36 ">
+               <button id="buyers_viewer" class="absolute top-0 font-semibold left-32 pl-5 md:flex rounded-r-full  items-center  view hover:bg-gray-400 lg:w-36 ">
                   <span class="py-5 px-3 text-gray-700 hover:text-gray-900 ">Buyers</span>
                </button> 
             </div>

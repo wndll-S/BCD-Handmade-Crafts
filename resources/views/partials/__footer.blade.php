@@ -14,57 +14,6 @@
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $('#categories').hover(function() {
-        $('#dropdown-example').css('display', 'block');
-    }, function() {
-        $('#dropdown-example').css('display', 'none');
-    });
-    $('.pop-up').click(function() {
-        $title = $(this).data('title');
-        $action = $(this).data('action');
-        $('#title').html($title);
-        $('#account_status').val($action);
-    });
-
-    $('#craftspeople_viewer').click(function(){
-        $('#buyer_tbl').css('display', 'none');
-        $('#seller_tbl').css('display', 'block');
-    });
-    $('#buyers_viewer').click(function(){
-        $('#buyer_tbl').css('display', 'block');
-        $('#seller_tbl').css('display', 'none');
-    });
-
-    $('.category').hover(function() {
-        var $id = $(this).data('action');
-        console.log($id); // Use console.log for debugging
-
-        $('#' + $id).css('display', 'flex');
-    }, function() {
-        // Handle mouse out if needed
-        var $id = $(this).data('action');
-        $('#' + $id).css('display', 'none');
-    });
-
-    const modalEl = document.getElementById('info-popup');
-    const privacyModal = new Modal(modalEl, {
-        placement: 'center'
-    });
-
-    privacyModal.show();
-
-    const closeModalEl = document.getElementById('close-modal');
-    closeModalEl.addEventListener('click', function() {
-        privacyModal.hide();
-    });
-
-    const acceptPrivacyEl = document.getElementById('confirm-button');
-    acceptPrivacyEl.addEventListener('click', function() {
-    alert('privacy accepted');
-    privacyModal.hide();
-    });
-    
-</script>
+<script src="{{ asset('js/all.js') }}"></script>
 </body>
 </html>

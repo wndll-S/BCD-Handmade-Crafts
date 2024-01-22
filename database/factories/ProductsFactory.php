@@ -31,7 +31,7 @@ class ProductsFactory extends Factory
         'category_id'=>fake()->randomElement($categoryIds),
         'price' => fake()->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 9999),
         'quantity' => fake()->numberBetween($min = 1, $max = 100),
-        'status' => fake()->numberBetween($min = 1, $max = 3),
+        'status' => fake()->numberBetween($min = 1, $max = 5),
         'created_at'=>now(),
         'updated_at'=>now(),
         ];

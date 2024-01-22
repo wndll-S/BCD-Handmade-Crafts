@@ -43,26 +43,26 @@ class AccountController extends Controller
                      ->onlyInput('email');
     }
     public function logout(Request $request){
-        $message = 'Logout Successful!';
-        if(auth()->guard('buyer')->check()){
-            auth()->guard('buyer')->check();
-            $request->session()->regenerate();
-            $request->session()->invalidate();
-            return redirect('/login')->with('message', $message);
+        $guard = null;
+
+        if (auth()->guard('buyer')->check()) {
+            $guard = 'buyer';
+        } elseif (auth()->guard('admin')->check()) {
+            $guard = 'admin';
+        } elseif (auth()->guard('seller')->check()) {
+            $guard = 'seller';
         }
-        else if(auth()->guard('admin')->check()){
-            auth()->guard('admin')->check();
-            $request->session()->regenerate();
+    
+        if ($guard) {
+            auth()->guard($guard)->logout();
             $request->session()->invalidate();
-            return redirect('/admin')->with('message', $message);
+            $request->session()->regenerateToken();
+    
+            $message = 'Logout Successful!';
+            return redirect("/{$guard}/login")->with('message', $message);
         }
-        else if(auth()->guard('seller')->check()){
-            auth()->guard('seller')->check();
-            $request->session()->regenerate();
-            $request->session()->invalidate();
-            return redirect('/seller/login')->with('message', $message);
-        }
-        else{return redirect('/');}
+    
+        return redirect('/');
         
     }
 }

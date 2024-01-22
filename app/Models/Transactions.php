@@ -10,7 +10,9 @@ class Transactions extends Model
 {
     use HasFactory;
     protected $table = 'transactions';
-    public $incrementing = true;
+    protected $keyType = 'uuid';
+    protected $primaryKey = 'transaction_id';
+    public $incrementing = false;
     public function products()
     {
         return $this->belongsTo(Products::class, 'product_id');

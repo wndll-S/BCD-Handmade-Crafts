@@ -1,6 +1,6 @@
 @include('partials.__header')
 <x-seller_navbar />
-<main>
+<main class="h-full">
     {{-- sidebar --}}
     <x-seller_aside />
     
@@ -11,12 +11,13 @@
            {{-- <button data-modal-target="addProduct" data-modal-toggle="addProduct" class="bg-blue-500 text-white hover:bg-blue-800 rounded-lg w-content h-max p-3">
                 Add a Product
            </button> --}}
-           <a href="/products/add" class=" bg-blue-500 text-white hover:bg-blue-800 rounded-lg w-content h-max p-3">
+           <a href="/products/add" class=" bg-blue-500 text-white hover:bg-blue-800 rounded-lg w-max h-max p-3">
                 Add a Product
            </a>
         </div>
-        <div class="flex flex-col gap-4 mb-4">
-        @foreach ($products as $item)
+        <div class="flex flex-col gap-4 mb-4 h-full">
+        @if ($products->isNotEmpty())
+            @foreach ($products as $item)
                 <a href="#" class="rounded bg-gray-100 h-max dark:bg-gray-800 p-5 hover:bg-gray-400">
                     <p><span class="font-bold">Product id:</span> {{$item->id}}</p>
                     <p><span class="font-bold">Seller:</span> {{$item->craftspeople->first_name}}</p>
@@ -26,8 +27,13 @@
                     <p><span class="font-bold">Price:</span> {{$item->price}}</p>
                     <p><span class="font-bold">Quantity:</span> {{$item->quantity}}</p>
                     <p><span class="font-bold">Status:</span> {{$item->status}}</p>
+                    <img src="{{ asset($item->image_url )}}" alt="{{$item->image_url}}" class="h-80 w-80">
                 </a>
-        @endforeach
+            @endforeach
+        @else
+            <div class="font-md text-5xl text-gray-600 mx-auto md:mt-60">You do not have any products yet!</div>
+        @endif
+        
         </div>
      </div>
  </main>
