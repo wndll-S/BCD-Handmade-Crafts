@@ -23,13 +23,13 @@
     
             <!-- secondary nav -->
             <div class="hidden md:flex items-center space-x-1">
-            <a href="#" class="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Login</a>
+            <a href="#" class="py-2 px-3 shadow-md bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">Login</a>
             <a href="register" class="py-5 px-3">Signup</a>
             </div>
     
             <!-- mobile button goes here -->
             <div class="md:hidden flex items-center">
-            <button class="mobile-menu-button">
+            <button class="mobile-menu-button shadow-md">
                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -46,7 +46,7 @@
     </nav>
   
     <x-messages />
-    <main class="md:flex flex-grow lg:flex-row justify-between items-center sm:block ">
+    <main class="md:flex flex-grow lg:flex-row justify-between items-center mb-28 sm:block ">
         <section class="flex flex-col items-center justify-center px-6 py-8 ml-auto md:h-full lg:py-0">
             <h1 class="font-bold text-8xl">butang d pic</h1>
             
@@ -90,10 +90,14 @@
                             </div>
                             <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                         </div>
-                        <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign In</button>
+                        <button type="submit" class="w-full shadow-md text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign In</button>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                             Don’t have an account yet? <a href="register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign Up</a>
                         </p>
+                        <hr>
+                        <div class="w-full text-center">
+                            <a href="/login" class=" font-medium text-primary-600 hover:underline dark:text-primary-500">Sign In as Buyer</a>
+                        </div>
                     </form>
                 </div>
             </div>

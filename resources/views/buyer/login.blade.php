@@ -94,6 +94,10 @@
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                             Don’t have an account yet? <a href="register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign Up</a>
                         </p>
+                        <hr>
+                        <div class="w-full text-center">
+                            <a href="/seller/login" class=" font-medium text-primary-600 hover:underline dark:text-primary-500">Sign In as Seller</a>
+                        </div>
                     </form>
                 </div>
             </div>

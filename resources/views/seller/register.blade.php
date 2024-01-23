@@ -16,20 +16,20 @@
             </div>
     
             <!-- primary nav -->
-            {{-- <div class="hidden md:flex items-center space-x-1">
-                <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Features</a>
-            </div> --}}
+            <div class="h-max w-max md:flex items-center space-x-1 border-dashed border rounded-lg border-sky-500 bg-blue-200 my-auto">
+               <p class=" px-3 py-2 text-gray-700 hover:text-gray-900 font-semibold">Seller</p>
+           </div> 
             </div>
     
             <!-- secondary nav -->
             <div class="hidden md:flex items-center space-x-1">
             <a href="login" class="py-5 px-3">Login</a>
-            <a href="#" class="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" >Signup</a>
+            <a href="#" class="py-2 px-3 shadow-md bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" >Signup</a>
             </div>
     
             <!-- mobile button goes here -->
             <div class="md:hidden flex items-center">
-            <button class="mobile-menu-button">
+            <button class="mobile-menu-button shadow-md">
                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -56,7 +56,7 @@
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8 shadow-2xl">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Register as a <span class="font-bold text-blue-700 underline italic">SELLER</span>
+                        Register a <span class="font-bold text-blue-700 underline italic">SELLER</span> Account
                     </h1>
                     <form action="/store/seller" method="POST"  class="space-y-4 md:space-y-6">
                         @csrf 
@@ -141,8 +141,11 @@
                         </div> --}}
                         <input type="text" name="image_url" value="https://via.placeholder.com/640x480.png/00eecc?text=libero" hidden>
       
-                        <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign Up</button>
+                        <button type="submit" class="w-full shadow-md text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign Up</button>
                   </form>  
+                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                     Already have an account yet? <a href="/seller/login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign In</a>
+                 </p>
                 </div>
             </div>
         </section>
