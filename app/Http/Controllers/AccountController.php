@@ -15,7 +15,7 @@ class AccountController extends Controller
     }
     public function show($id){
         $seller = Craftspeople::find($id);
-        return view('admin.edit', ['seller' => $seller]);
+        return view('admin.edit', ['seller' => $seller, 'title' => 'Edit Account']);
     }
     public function update(Request $request, $id){
         //butang d update logic

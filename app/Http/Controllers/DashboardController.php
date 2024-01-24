@@ -78,7 +78,8 @@ class DashboardController extends Controller
             'units' => $units,
             'product_quantity' =>  $productQuantities,
             'maxQuantityProductId' => $maxQuantityProductId,
-            'maxQuantity' => $maxQuantity
+            'maxQuantity' => $maxQuantity,
+            'title' => 'Dashboard'
         ]);
 }
     public function report(Request $request){

@@ -40,7 +40,7 @@ class TransactionsController extends Controller
         if(auth()->guard('buyer')->check()){
             $buyer = auth()->guard('buyer')->user()->id;
             $buyer_orders = Transactions::where('buyer_id', $buyer)->get();
-            return view('buyer.orders', ['order' => $buyer_orders]);
+            return view('buyer.orders', ['order' => $buyer_orders, 'title' => 'Orders']);
         }
         elseif( auth()->guard('seller')->check()){
             $seller = auth()->guard('seller')->user()->id;
@@ -48,7 +48,7 @@ class TransactionsController extends Controller
                 $query->where('craftspeople_id', $seller);
             })->get();
             // dd($seller_orders);
-            return view('seller.orders', ['order' => $seller_orders]);
+            return view('seller.orders', ['order' => $seller_orders])->with('title', 'Orders');
         }
     }
     public function update(Request $request, $id){

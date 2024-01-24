@@ -120,7 +120,7 @@ Route::middleware(['auth:buyer', 'App\Http\Middleware\RevalidateBackHistory'])->
 
 
 Route::get('/login', function () {
-    return view('buyer.login')->with(['role' => 'buyer', 'title' => 'BCD Handmade Crafts']);
+    return view('buyer.login')->with(['role' => 'buyer', 'title' => 'Local Handmade Crafts Online Store']);
 })->name('login');
 
 
@@ -135,7 +135,7 @@ Route::post('/logout', [AccountController::class, 'logout'])->name('logout');
 
 
 Route::get('/', function(){
-    return view('index')->with('title', 'BCD Handmade Crafts');
+    return view('index')->with('title', 'Local Handmade Crafts Online Store');
 });
 
 /* nd ma access kun nd authenticated ang user tungod sa middleware

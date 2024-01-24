@@ -38,9 +38,6 @@
                 <th scope="col" class="px-6 py-3">
                     Updated At
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -82,9 +79,6 @@
                 </td>
                 <td class="px-6 py-4">
                    {{$item->updated_at}}
-                </td>
-                <td class="px-6 py-4">
-                     <a href="/transactions/{{$item->id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit status</a>
                 </td>
             </tr>
             @endforeach
