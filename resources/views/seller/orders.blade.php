@@ -9,11 +9,11 @@
       <div class="p-4 md:border-l-2  border-gray-200 dark:border-gray-700">
          <h2 class="font-bold text-5xl text-gray-800 mb-5">Orders</h2>
          <div class="flex mb-7 space-x-4">
-            <button data-status="pending" class="bg-blue-900 status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Pending</button>
-            <button data-status="processing" class="status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Processing</button>
-            <button data-status="out-for-delivery" class=" status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Out-for-Delivery</button>
-            <button data-status="completed" class="status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Completed</button>
-            <button data-status="cancelled" class="status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Cancelled</button>
+            <button data-status="pending" class="status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Pending ({{$order->where('status', 'pending')->count()}})</button>
+            <button data-status="processing" class="status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Processing ({{$order->where('status', 'processing')->count()}})</button>
+            <button data-status="out-for-delivery" class=" status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Out-for-Delivery ({{$order->where('status', 'out-for-delivery')->count()}})</button>
+            <button data-status="completed" class="status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Completed ({{$order->where('status', 'completed')->count()}})</button>
+            <button data-status="cancelled" class="status p-3 bg-blue-500 rounded-lg hover:bg-blue-800 text-white shadow-lg">Cancelled ({{$order->where('status', 'cancelled')->count()}})</button>
          </div>
          <div id="content" class="flex flex-col mb-4 space-y-5" >
             @foreach ($order as $item)

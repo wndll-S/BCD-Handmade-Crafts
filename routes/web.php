@@ -49,31 +49,34 @@ use App\Http\Middleware\CheckSellerAccountStatus;
 
 
 //admin routes
-Route::get('/admin', [AdminController::class, 'admin']);
-Route::get('/admin/accounts', [AccountController::class, 'index']);
-Route::get('/admin/handmade-crafts', [ProductsController::class, 'index'])->name('admin.handmade_crafts');
-Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
-Route::get('/admin/category/{id}', [CategoryController::class, 'edit']);
-Route::get('/admin/transactions', [TransactionsController::class, 'index']);
+Route::middleware(['auth:admin', 'App\Http\Middleware\RevalidateBackHistory'])->group(function () {
+    Route::get('/admin/accounts', [AccountController::class, 'index']);
+    Route::get('/admin/handmade-crafts', [ProductsController::class, 'index'])->name('admin.handmade_crafts');
+    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::get('/admin/category/{id}', [CategoryController::class, 'edit']);
+    Route::get('/admin/transactions', [TransactionsController::class, 'index']);
+    Route::get('/admin/dashboard', [DashboardController::class, 'admin']);
+    Route::get('/accounts/{id}', [AccountController::class, 'show']);
+    Route::get('/admin/handmade-crafts/{id}', [ProductsController::class, 'show']);
+    Route::put('/update/craftspeople/{id}', [AccountController::class, 'update']);
+    Route::put('/update/category/{id}', [CategoryController::class, 'update']);
+    Route::put('/update/product/{id}', [ProductsController::class, 'update']);
+    Route::get('/admin/dashboard/reports', [DashboardController::class, 'report'])->name('report');
 
-Route::get('/admin/dashboard', [DashboardController::class, 'admin']);
+    //waay pa ni na himo sa controller
+    Route::delete('/delete/category/{id}', [CategoryController::class, 'destroy']);
+    Route::delete('/delete/buyer/{id}', [BuyerController::class, 'destroy']);
+});
+Route::get('/admin', [AdminController::class, 'admin']);
 Route::post('/login/admin', [AdminController::class, 'process']);
-Route::get('/accounts/{id}', [AccountController::class, 'show']);
-Route::get('/admin/handmade-crafts/{id}', [ProductsController::class, 'show']);
-Route::put('/update/craftspeople/{id}', [AccountController::class, 'update']);
-Route::put('/update/category/{id}', [CategoryController::class, 'update']);
-Route::put('/update/product/{id}', [ProductsController::class, 'update']);
-//waay pa ni na himo sa controller
-Route::delete('/delete/category/{id}', [CategoryController::class, 'destroy']);
-Route::delete('/delete/buyer/{id}', [BuyerController::class, 'destroy']);
+
+
 
 
 
 // seller routes
 Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory', 'check.seller.account'])->group(function(){
-    Route::get('/seller/dashboard', function () {
-        return view('seller.home');
-    })->name('dashboard');
+    Route::get('/seller/dashboard', [DashboardController::class, 'seller'])->name('dashboard');
     Route::get('/seller/orders', [TransactionsController::class, 'orders']);
     Route::put('/order/edit/{id}', [TransactionsController::class, 'update']);
     Route::post('/store/product', [ProductsController::class, 'store']);
@@ -85,6 +88,7 @@ Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory', '
 Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory'])->group(function(){
     Route::get('/pending', [CraftspeopleController::class, 'pending'])->name('pending');
 });
+
 Route::get('/seller/login', function () {
     return view('seller.login');
 });
@@ -109,10 +113,11 @@ Route::middleware(['auth:buyer', 'App\Http\Middleware\RevalidateBackHistory'])->
     Route::get('/category', [CategoryController::class, 'index'])->name('buyer.categories');;
     Route::get('/account', [BuyerController::class, 'index']);
     Route::get('/orders', [TransactionsController::class, 'orders']);
+    Route::get('/handmade-crafts/order/{id}', [TransactionsController::class, 'create']);
+    Route::post('/store/transaction', [TransactionsController::class, 'store']);
 });
 
-Route::get('/handmade-crafts/order/{id}', [TransactionsController::class, 'create']);
-Route::post('/store/transaction', [TransactionsController::class, 'store']);
+
 
 Route::get('/login', function () {
     return view('buyer.login')->with(['role' => 'buyer', 'title' => 'BCD Handmade Crafts']);
@@ -130,12 +135,8 @@ Route::post('/logout', [AccountController::class, 'logout'])->name('logout');
 
 
 Route::get('/', function(){
-    return view('index');
+    return view('index')->with('title', 'BCD Handmade Crafts');
 });
-//pang tawag sng isa ka function sa isa ka controller
-Route::get('/user', [UserController::class, 'index']);
-
-Route::get('/user/{id}', [UserController::class, 'show']);
 
 /* nd ma access kun nd authenticated ang user tungod sa middleware
 Route::get('/user/{id}', [UserController::class, 'show'])->middleware('auth'); */

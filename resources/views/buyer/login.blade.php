@@ -1,9 +1,10 @@
 @include('partials.__header')
     <!-- navbar goes here -->
+    
     <nav class="bg-gray-100">
         <div class="max-w-6xl mx-auto px-4">
         <div class="flex justify-between">
-    
+            <x-messages />
             <div class="flex space-x-4">
             <!-- logo -->
             <div>
@@ -14,7 +15,7 @@
                 <span class="font-bold">BCD Handmade Crafts</span>
                 </a>
             </div>
-            <x-messages />
+
             <!-- primary nav -->
             {{-- <div class="hidden md:flex items-center space-x-1">
                 <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Features</a>
@@ -123,4 +124,5 @@
             </div>
         </div>
       </div> --}}
+      
 @include('partials.__footer')

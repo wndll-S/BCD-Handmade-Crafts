@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Categories;
 use App\Models\Bookmark;
+use App\Models\Craftspeople;
 use App\Models\Products;
 use App\Models\Transactions;
 
@@ -32,13 +33,19 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $categories = Categories::all();
             $orders = Transactions::whereIn('status', ['pending', 'processing', 'out-for-delivery'])->get();
+            $auth_seller = '';
+            if(auth()->guard('seller')->user()){
+                $auth_seller = auth()->guard('seller')->user()->id;
+            }
             // $products = Products;
             // Filter categories with products
             $categoriesWithProducts = $categories->filter(function ($category) {
                 return $category->products->where('status', 'Active')->isNotEmpty();
             });
+            $product = Products::where('craftspeople_id',  $auth_seller)->get();
+            $product_count =$product->count();
             // $category->products->where('status', 'active')->isNotEmpty();
-            $view->with(['categoriesWithProducts' => $categoriesWithProducts, 'categories' => $categories, 'orders' => $orders]);
+            $view->with(['categoriesWithProducts' => $categoriesWithProducts, 'categories' => $categories, 'orders' => $orders, 'product_count' => $product_count]);
         
             // Check if there's an authenticated buyer user
             $buyerUser = auth('buyer')->user();

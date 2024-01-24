@@ -62,6 +62,9 @@ class AccountController extends Controller
             if($guard == 'buyer'){
                 return redirect("/login")->with('message', $message);
             }
+            else if($guard == 'admin'){
+                return redirect("/admin")->with('message', $message);
+            }
             else{
                 return redirect("/{$guard}/login")->with('message', $message);
             }

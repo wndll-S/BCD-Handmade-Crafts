@@ -1,4 +1,4 @@
-<footer class="flex fixed bottom-0 left-0 right-0 bg-gray-50 pt-8 pb-6 sm:z-0 lg:z-50 border-t-2 border-gray-100 shadow-2xl">
+<footer id="footer" class="flex fixed bottom-0 left-0 right-0 bg-gray-50 pt-8 pb-6 sm:z-0 lg:z-40 border-t-2 border-gray-100 shadow-2xl">
     <div class="container mx-auto px-4">
         <div class="flex flex-wrap items-center md:justify-between justify-center">
             <div class="w-full md:w-4/12 px-4 mx-auto text-center">

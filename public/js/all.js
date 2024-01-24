@@ -114,6 +114,40 @@ $('.view').click(function () {
     $(this).addClass('bg-white');
 });
 
+// $('#to_date').attr('min', new Date().toISOString().split('T')[0]);
+var currentDate = new Date().toISOString().split('T')[0];
+$('#from_date, #to_date').attr('max', currentDate);
+        // Listen for changes in the "From" date input
+        $('#from_date').on('input', function () {
+            // Get the selected date
+            var fromDate = new Date($(this).val());
+            var nextDay = new Date(fromDate);
+            nextDay.setDate(fromDate.getDate() + 1);
+
+            // Update the "To" date input
+            $('#to_date').attr('min', nextDay.toISOString().split('T')[0]);
+        });
+        $('#saveAsPdfButton').on('click', function() {
+            // Trigger the print dialog to save as PDF
+            $('.babye').css('display', 'none');
+            window.print();
+        });
+        $(window).on('afterprint', function() {
+            $('.babye').css('display', 'block');
+            $('#sidebar-multi-level-sidebar').css('display', 'block');
+            $('#print').css('display', 'flex');
+            $('#lapad').addClass('sm:ml-64');
+        });
+
+        $('#sandwich').on('click', function(){
+            $('#footer').addClass('z-50');
+        });
+        $('#print').click(function(){
+            $('.tago').css('display', 'none');
+            $('#lapad').removeClass('sm:ml-64');
+            window.print();
+        });
+
 //vanilla js na d
 const modalEl = document.getElementById('info-popup');
 const privacyModal = new Modal(modalEl, {
@@ -132,3 +166,11 @@ acceptPrivacyEl.addEventListener('click', function() {
 alert('privacy accepted');
 privacyModal.hide();
 });
+// Get the canvas element
+const config = {
+    type: 'pie',
+    data: data,
+    options: {
+        // Add any additional options here
+    }
+};

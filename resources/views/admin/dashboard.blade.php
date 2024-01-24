@@ -17,13 +17,19 @@
 
                   $craftsperson = $product->craftspeople;
 
+                  $number_of_buyers_with_transaction = $transactions->pluck('buyer_id')->unique()->count();
+                  $total_number_of_buyers = $buyers->count(); 
+                  $total_number_of_sellers = $seller->count(); 
+                  
+                  $buyers_with_no_transactions = $total_number_of_buyers - $number_of_buyers_with_transaction;
+
 
 @endphp
 @include('partials.__header')
    {{-- navbar --}}
    <x-buyer_navbar />
    
- <main>
+ <main class="mb-28">
    {{-- sidebar --}}
    <x-admin_aside />
    
@@ -57,9 +63,141 @@
          <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Number of completed Orders: {{$transactions->where('status', 'completed')->count()}}</p></div>
          <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Number of cancelled Orders: {{$transactions->where('status', 'cancelled')->count()}}</p></div>
          <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Categories Count: {{$category->count()}}</p></div>
+         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+         <div class="py-6 my-auto" id="pie-chart"></div>
+         <div class="py-6 my-auto" id="pie-chart-buyer"></div>
       </div>
    </div>
-   
+   <script>
+      // ApexCharts options and config
+      window.addEventListener("load", function() {
+        const getChartOptions = () => {
+            return {
+              series: [{{$number_of_buyers_with_transaction}}, {{$buyers_with_no_transactions}}],
+              colors: ["#1C64F2", "#16BDCA"],
+              chart: {
+                height: 420,
+                width: "100%",
+                type: "pie",
+              },
+              stroke: {
+                colors: ["white"],
+                lineCap: "",
+              },
+              plotOptions: {
+                pie: {
+                  labels: {
+                    show: true,
+                  },
+                  size: "100%",
+                  dataLabels: {
+                    offset: -25
+                  }
+                },
+              },
+              labels: ["Buyers w/transaction", "Buyers w/out transaction"],
+              dataLabels: {
+                enabled: true,
+                style: {
+                  fontFamily: "Inter, sans-serif",
+                },
+              },
+              legend: {
+                position: "bottom",
+                fontFamily: "Inter, sans-serif",
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (value) {
+                    return value
+                  },
+                },
+              },
+              xaxis: {
+                labels: {
+                  formatter: function (value) {
+                    return value
+                  },
+                },
+                axisTicks: {
+                  show: false,
+                },
+                axisBorder: {
+                  show: false,
+                },
+              },
+            }
+          }
+    
+          if (document.getElementById("pie-chart") && typeof ApexCharts !== 'undefined') {
+            const chart = new ApexCharts(document.getElementById("pie-chart"), getChartOptions());
+            chart.render();
+          }
+          
+        const getChartOptionsBuyer = () => {
+            return {
+              series: [{{$total_number_of_sellers}}, {{$total_number_of_buyers}}],
+              colors: ["#3498db", "#e74c3c"],
+              chart: {
+                height: 420,
+                width: "100%",
+                type: "pie",
+              },
+              stroke: {
+                colors: ["white"],
+                lineCap: "",
+              },
+              plotOptions: {
+                pie: {
+                  labels: {
+                    show: true,
+                  },
+                  size: "100%",
+                  dataLabels: {
+                    offset: -25
+                  }
+                },
+              },
+              labels: ["Craftspeople", "Buyers"],
+              dataLabels: {
+                enabled: true,
+                style: {
+                  fontFamily: "Inter, sans-serif",
+                },
+              },
+              legend: {
+                position: "bottom",
+                fontFamily: "Inter, sans-serif",
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (value) {
+                    return value
+                  },
+                },
+              },
+              xaxis: {
+                labels: {
+                  formatter: function (value) {
+                    return value
+                  },
+                },
+                axisTicks: {
+                  show: false,
+                },
+                axisBorder: {
+                  show: false,
+                },
+              },
+            }
+          }
+    
+          if (document.getElementById("pie-chart-buyer") && typeof ApexCharts !== 'undefined') {
+            const chart = new ApexCharts(document.getElementById("pie-chart-buyer"), getChartOptionsBuyer());
+            chart.render();
+          }
+      });
+    </script>
  </main>
 <x-generate_reports_modal />
 @include('partials.__footer')
