@@ -25,7 +25,7 @@ $('#buyers_viewer').click(function(){
     $('#seller_tbl').css('display', 'none');
 });
 
-$('.category').hover(function() {
+$('.category, .product').hover(function() {
     var $id = $(this).data('action');
     console.log($id); // Use console.log for debugging
 

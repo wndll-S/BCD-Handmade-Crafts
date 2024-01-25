@@ -26,7 +26,7 @@ class DashboardController extends Controller
                                     ]);
     }
     public function seller(){
-        $authenticated_seller = auth()->guard('')->user()->id;
+        $authenticated_seller = auth()->guard('seller')->user()->id;
         // Get product ids owned by the authenticated seller
         $product_ids = Products::where('craftspeople_id', $authenticated_seller)->pluck('id');
 
@@ -49,6 +49,7 @@ class DashboardController extends Controller
         // Create variables to track the largest quantity and corresponding product
         $maxQuantity = 0;
         $maxQuantityProductId = null;
+        $productQuantities = [];
 
         foreach ($transactions as $transaction) {
             $product_id = $transaction->product_id;

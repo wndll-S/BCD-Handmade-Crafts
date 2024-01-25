@@ -4,7 +4,7 @@
     <nav class="bg-gray-100">
         <div class="max-w-6xl mx-auto px-4">
         <div class="flex justify-between">
-            <x-messages />
+            {{-- <x-messages /> --}}
             <div class="flex space-x-4">
             <!-- logo -->
             <div>

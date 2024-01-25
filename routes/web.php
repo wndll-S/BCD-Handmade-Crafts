@@ -84,16 +84,18 @@ Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory', '
     Route::get('/products/add', function () {
         return view('seller.add_product');
     });
+    Route::get('/edit/product/{id}', [ProductsController::class, 'edit']);
+    Route::put('/update/product/{id}', [ProductsController::class, 'change']);
 });
 Route::middleware(['auth:seller', 'App\Http\Middleware\RevalidateBackHistory'])->group(function(){
     Route::get('/pending', [CraftspeopleController::class, 'pending'])->name('pending');
 });
 
 Route::get('/seller/login', function () {
-    return view('seller.login');
+    return view('seller.login')->with('title', 'Seller Login');
 });
 Route::get('/seller/register', function () {
-    return view('seller.register');
+    return view('seller.register')->with('title', 'Seller Sign Up');
 });
 
 //mga same controller nga file under CraftspeopleController

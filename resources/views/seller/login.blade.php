@@ -43,14 +43,13 @@
         </div>
     </nav>
   
-    <x-messages />
+    {{-- <x-messages /> --}}
     <main class="md:flex flex-grow lg:flex-row justify-between items-center mb-28 sm:block ">
-        <section class="flex flex-col items-center justify-center px-6 py-8 ml-auto md:h-full lg:py-0">
-            <h1 class="font-bold text-8xl">butang d pic</h1>
-            
+        <section class="lg:w-3/5 flex items-center justify-center">
+            <img src="{{asset('images/background_images/seller.jpg')}}" alt="BCD-Handmade-Craft Buyer Login" class="shadow-xl h-4/5 w-4/5 opacity-90 rounded-3xl"> 
         </section>
 
-        <section class="flex flex-col lg:w-96 items-center justify-center px-6 py-8 mx-auto  md:h-full lg:py-0 lg:mr-24">
+        <section class="lg:w-2/5 flex-col">
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8 shadow-2xl">
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

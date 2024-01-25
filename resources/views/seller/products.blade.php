@@ -15,23 +15,35 @@
                 Add a Product
            </a>
         </div>
-        <div class="flex flex-col gap-4 mb-4 h-full">
+        <div class="grid grid-cols-2 gap-4 mb-4 h-full">
         @if ($products->isNotEmpty())
             @foreach ($products as $item)
-                <a href="#" class="rounded bg-gray-100 h-max dark:bg-gray-800 p-5 hover:bg-gray-400">
-                    <p><span class="font-bold">Product id:</span> {{$item->id}}</p>
-                    <p><span class="font-bold">Seller:</span> {{$item->craftspeople->first_name}}</p>
-                    <p><span class="font-bold">Category:</span> {{$item->category->title}}</p>
-                    <p><span class="font-bold">Product Name:</span> {{$item->name}}</p>
-                    <p><span class="font-bold">Product Description:</span> {{$item->description}}</p>
-                    <p><span class="font-bold">Price:</span> {{$item->price}}</p>
-                    <p><span class="font-bold">Quantity:</span> {{$item->quantity}}</p>
-                    <p><span class="font-bold">Status:</span> {{$item->status}}</p>
-                    <img src="{{ asset($item->image_url )}}" alt="{{$item->image_url}}" class="h-80 w-80">
-                </a>
+                <div data-action="{{ $item->id }}" class="product rounded flex flex-row bg-gray-100 h-max dark:bg-gray-800 p-5 hover:bg-gray-400 space-x-5 relative">
+                    <div class="">
+                        <img src="{{ asset($item->image_url )}}" alt="{{$item->image_url}}" class="h-80 w-80">
+                    </div>
+                    <div class="space-y-5">
+                        <p><span class="font-bold">Product id:</span> <span class="font-bold text-xl">{{$item->id}}</span></p>
+                        <p><span class="font-bold">Product Name:</span> {{$item->name}}</p>
+                        <p><span class="font-bold">Product Description:</span> {{$item->description}}</p>
+                        <p><span class="font-bold">Category:</span> {{$item->category->title}}</p>
+                        <p><span class="font-bold">Price:</span> {{$item->price}}</p>
+                        <p><span class="font-bold">Quantity:</span> {{$item->quantity}}</p>
+                        <p><span class="font-bold">Status:</span> {{$item->status}}</p>
+                        <div id="{{ $item->id }}" class="absolute hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-x-4">
+                            {{-- <a href="" class=" p-3 rounded-md bg-blue-500 hover:bg-blue-800">View Products</a> --}}
+                            <a href="/edit/product/{{ $item->id }}" class="flex flex-row p-3 rounded-md bg-orange-600 hover:bg-orange-900"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                               <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                               <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                            </svg>
+                            Edit
+                            </a>
+                         </div> 
+                    </div>
+                </div>
             @endforeach
         @else
-            <div class="font-md text-5xl text-gray-600 mx-auto md:mt-60">You do not have any products yet!</div>
+            <div class="font-md text-5xl text-gray-600 mx-auto md:mt-60 col-span-2">You do not have any products yet!</div>
         @endif
         
         </div>

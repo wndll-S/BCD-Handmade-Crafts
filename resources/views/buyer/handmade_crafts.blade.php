@@ -15,14 +15,21 @@
                   <h2 class="font-bold text-2xl mb-2" id="{{ $category->title }}">{{ $category->title }}</h2>
                   @foreach ($category->products as $product)
                      @if ($product->status == 'Active')
-                        <div data-action="{{ $product->id }}" class="category rounded bg-gray-100  dark:bg-gray-800 p-5 hover:text-gray-300 hover:bg-gray-400 relative">
-                           <h2 class="font-bold text-xl">{{ $product->name }}</h2>
-                           <p> description {{ $product->description }} </p>
-                           <p> seller: {{ $product->craftspeople->first_name }} {{ $product->craftspeople->last_name }} {{ $product->craftspeople->name_ext }}</p>
-                           <p> category: {{ $product->category->title }} </p>
-                           <p> available stock: {{$product->quantity }}</p>
-                           <p> price: {{$product->price }}</p>
-                           <img src="{{asset($product->image_url)}}" alt="{{$product->name}}" class="h-96 w-96">
+                        <div data-action="{{ $product->id }}" class="category flex flex-row rounded bg-gray-100  dark:bg-gray-800 p-5 hover:text-gray-300 hover:bg-gray-400 relative">
+                           <div>
+                              <img src="{{asset($product->image_url)}}" alt="{{$product->name}}" class="h-96 w-96 rounded-md">
+                           </div>
+                           <div class="ml-5 space-y-6">
+                              <h2 class="font-bold text-xl">{{ $product->name }}</h2>
+                              <p> Description: <span class="font-semibold text-xl"> {{ $product->description }} </span></p>
+                              <p> Seller: <span class="font-semibold text-xl">{{ $product->craftspeople->first_name }} {{ $product->craftspeople->last_name }} {{ $product->craftspeople->name_ext }}</span> </p>
+                              <p> Category: <span class="font-semibold text-xl">{{ $product->category->title }}</span>  </p>
+                              <p> Available stock: <span class="font-semibold text-xl">{{$product->quantity }}</span> </p>
+                              <p> Price: <span class="font-semibold text-xl">{{$product->price }}</span></p>
+                           </div>
+                           
+                           
+
                            <div id="{{ $product->id }}" class="absolute hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-x-4">
                               <a href="/handmade-crafts/order/{{$product->id}}" class="order p-3 rounded-md bg-red-700 hover:bg-red-900 flex">
                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

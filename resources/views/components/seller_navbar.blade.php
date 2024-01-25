@@ -51,18 +51,12 @@
              <!-- Dropdown menu -->
     <div id="dropdownInformation" class="mr-4 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-        <div>Bonnie Green</div>
-        <div class="font-medium truncate">name@flowbite.com</div>
+        <div>{{auth()->guard('seller')->user()->first_name}} {{auth()->guard('seller')->user()->last_name}}</div>
+        <div class="font-medium truncate">{{auth()->guard('seller')->user()->email}}</div>
         </div>
         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
         <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-        </li>
-        <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-        </li>
-        <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+            <a href="/seller/dashboard" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
         </li>
         </ul>
         <div class="py-2">

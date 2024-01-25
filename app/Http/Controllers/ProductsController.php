@@ -84,6 +84,31 @@ class ProductsController extends Controller
         $product->update($validated);
         return redirect('/admin/handmade-crafts')->with('message', 'Successfully made changes!');
     }
+    public function change(Request $request, $id){
+        $product = Products::find($id);
+        $validated = $request->validate([
+            'status' => 'Required|in:Active,Pending,Deleted,Declined,Suspended',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required', 
+            'quantity' => 'required',
+            'image_url' => 'required',
+            'category_id' => 'required'
+        ]);
+        $validated['updated_at'] = Carbon::now();
+        $image = $request->file('image_url');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // Move the file to the public directory
+        $image->move(public_path('images/products'), $imageName);
+
+        $validated['image_url'] = 'images/products/' . $imageName;
+        $product->update($validated);
+        return redirect('/seller/products')->with('message', 'Successfully made changes!');
+    }
+    public function edit($id){
+        $product = Products::find($id);
+        return view ('seller.edit_product', ['product' => $product]);
+    }
     private function generateCustomId()
     {
         // Generate a unique ID starting with 'B' followed by 10 numbers

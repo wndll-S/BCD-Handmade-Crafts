@@ -10,10 +10,12 @@
          <div class="flex flex-row  justify-between">
             <div>
                <h2 class="text-5xl font-bold mb-4 ml-2 flex place-content-center text-gray-800">Account Details</h2>
-               <img class="h-48 w-48 border-2 rounded-full" src="{{auth('buyer')->user()->image_url}}" alt="{{auth('buyer')->user()->first_name}} {{auth('buyer')->user()->last_name}}">                   
-               <p>{{auth('buyer')->user()->first_name}} {{auth('buyer')->user()->last_name}} {{auth('buyer')->user()->name_ext}}</p>
-               <p>{{auth('buyer')->user()->mobile_number}}</p>
-               <p>{{auth('buyer')->user()->email}}</p>
+               <div class="mx-auto">
+                  <img class="h-48 w-48 border-2 rounded-full" src="{{auth('buyer')->user()->image_url}}" alt="{{auth('buyer')->user()->first_name}} {{auth('buyer')->user()->last_name}}">                   
+                  <p class="font-bold text-2xl">{{auth('buyer')->user()->first_name}} {{auth('buyer')->user()->last_name}} {{auth('buyer')->user()->name_ext}}</p>
+                  <p class="font-bold">{{auth('buyer')->user()->mobile_number}}</p>
+                  <p class="font-semibold text-gray-700">{{auth('buyer')->user()->email}}</p>
+               </div>
             </div>
             <div>
                <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button" class="flex text-center border-2 p-3 font-medium text-sm bg-blue-600 text-white hover:bg-blue-800 rounded-lg group">
@@ -23,7 +25,7 @@
             </div>
             
          </div>
-         <div>
+         {{-- <div>
             <h2 class="font-bold text-xl">Saved Products</h2>
             <div class="flex flex-col mb-4" >
                @if(auth('buyer')->check())
@@ -37,7 +39,7 @@
                   @endforeach
                @endif
             </div>
-         </div>
+         </div> --}}
          @if ($errors->any())
             <div class="alert alert-danger">
                <ul>

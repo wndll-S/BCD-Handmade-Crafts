@@ -23,12 +23,12 @@
          </button>
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 p-4 md:border-l-2">
-            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Your Products: {{count($products)}}</p></div>
-            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Times your products were bought: {{count($transactions)}}</p></div>
-            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Number of Unique Customers: {{count($buyer_ids)}}</p></div>
-            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Revenue: {{$revenue}}</p></div>
-            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Units Sold: {{$units}}</p></div>
-            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Best Selling Product: {{$product_name}} ({{$maxQuantity}})</p></div>
+            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Number of Products: {{count($products)}}</p></div>
+            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Purchase Frequency: {{count($transactions)}}</p></div>
+            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Unique Customer Count: {{count($buyer_ids)}}</p></div>
+            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Total Revenue: {{$revenue}}</p></div>
+            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Total Units Sold: {{$units}}</p></div>
+            <div class="flex border rounded-md p-4 bg-gray-700"><p class="text-white font-semibold">Top Selling Product: {{$product_name ?? 'N/A'}} ({{$maxQuantity}})</p></div>
         </div>
     </div>
 </main>
